@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="dtw.js"></script>
+	</head>
+	<body>
+		<SCRIPT>
+		var n=1000,m=10;//n为矢量队列的最大大小，m为矢量的维度。
+		var a=[],b=[],c=[];
+		for(var i=0;i<n;i++){
+			a.push([]);
+			b.push([]);
+			c.push([]);
+			for(var j=0;j<m;j++){
+				var k=Math.floor(Math.random()*100);
+				a[i].push(k)//基准队列
+				b[i].push(k+Math.floor(Math.random()*10))//相似队列
+				c[i].push(Math.floor(Math.random()*100))//随机队列
+			}
+		}
+		//随机删除部分帧
+		for(var i=1;i<n;i++){
+			if(Math.random()<0.1) a.splice(Math.floor(Math.random()*a.length),1)
+			if(Math.random()<0.1) b.splice(Math.floor(Math.random()*b.length),1)
+			if(Math.random()<0.2) c.splice(Math.floor(Math.random()*c.length),1)
+		}
+		var t=Date.now();
+			document.write("<br>相同队列距离dtw(a,a)="+dtw(a,a));
+			document.write("<br>相似队列距离dtw(a,b)="+dtw(a,b));
+			document.write("<br>随机队列距离dtw(a,c)="+dtw(a,c));		
+			document.write("<br>随机队列距离dtw(b,c)="+dtw(b,c));		
+			document.write("<br>用时"+(Date.now()-t)+"毫秒")
+		</SCRIPT>
+		
+	</body>
+</html>
